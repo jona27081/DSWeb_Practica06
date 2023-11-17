@@ -92,8 +92,18 @@ public class ControllerVenta {
 
     //Hola
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id) {
-        return null;
+    public ResponseEntity<Venta> delete(@PathVariable Long id) {   
+        try {
+            Optional<Venta> _v = ventRepository.findById(id);
+            List<DetalleVenta> list = detalleVentaRepository.findByVentaId(id);
+            for(DetalleVenta dV: list){
+                detalleVentaRepository.delete(dV);
+            }
+            ventRepository.delete(_v.get());
+            return new ResponseEntity<>(_v.get(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ExceptionHandler(Exception.class)
