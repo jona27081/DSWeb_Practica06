@@ -41,6 +41,7 @@ public class ControllerVenta {
     RepositoryDetalleVenta detalleVentaRepository;
     @Autowired
     RepositoryVenta ventRepository;
+    
 
     @GetMapping("/")
     public List<DTOVistaVenta> list() {
