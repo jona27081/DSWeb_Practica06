@@ -90,6 +90,7 @@ public class ControllerVenta {
 
     }
 
+    //Hola
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable String id) {
         return null;
